@@ -17,3 +17,20 @@ var firstTrain=0;
 var frequency=0;
 
 
+$("#addUser").on("click", function (event) {
+    event.preventDefault();
+    trainName = $("#trainInput").val().trim();
+    destination = $("#destinationInput").val().trim();
+    firstTrain = $("#firstTrainInput").val().trim();
+    frequency = $("#frequencyInput").val().trim();
+    
+
+    firebase.database().ref().push({
+        trainName: trainName,
+        destination: destination,
+        firstTrain: firstTrain,
+        frequency: frequency
+        // dateAdded: firebase.database.ServerValue.TIMESTAMP
+
+    })
+})
