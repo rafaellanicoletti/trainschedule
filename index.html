@@ -38,7 +38,7 @@ Styling and theme are completely up to you. Get Creative! -->
         <p class="text-center">Check Departing and Arrival times.</p>
     </div>
 
-<div class="container">
+<div id="trains-results" class="container">
     <div class="row">
         <div class="col1">
             Current Train Schedule
@@ -61,33 +61,18 @@ Styling and theme are completely up to you. Get Creative! -->
             Minutes Away
         </div>
     </div>
-    <div class="row">
-        <div class="col">
-            <h3 id="trainName"></h3>
-        </div>
-        <div class="col">
-            <h3 id="destination"></h3>
-        </div>
-        <div class="col">
-            <h3 id="frequency"></h3>
-        </div>
-        <div class="col">
-            <h3 id="nextArrival"></h3>
-        </div>
-        <div class="col">
-            <h3 id="minutesAway"></h3>
-        </div>
-    </div>
+
 </div>
 
-<div class="row">
-    <div class="col-lg-6">
-        <div class="panel panel-default">
-            <div class="panel-heading"> ABOUT CLASS?!
+<div class="form-container">
+    <div class="row">
+     <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
                 <h3 class="panel-title">Add Train</h3>
-            </div>
-            <div class="panel-body">
-                <form role="form">
+                </div>
+                <div class="panel-body">
+                    <form role="form">
                     <div class="form-group">
                         <label for="text">Train Name: </label>
                         <input type="text" class="form-control" id="trainInput">
@@ -105,8 +90,9 @@ Styling and theme are completely up to you. Get Creative! -->
                         <input type="number" class="form-control" id="frequencyInput">
                     </div>
                     
-                    <button type="submit" class="btn btn-dark" id="addUser">Add Train</button>
-                </form>
+                        <button type="submit" class="btn btn-dark" id="addUser">Add Train</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

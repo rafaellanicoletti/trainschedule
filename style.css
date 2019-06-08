@@ -1,0 +1,22 @@
+.jumbotron {
+    background: url("https://adventure.com/wp-content/uploads/2018/08/Hero-Transiberian-Railway-in-winter-Circum-Baikal-section-Photo-credit-iStock-Serjio74-1920x1080.jpg");
+}
+
+.col1{
+    font-size: 20px;
+    align-content: center;
+    /* margin-left: 42%; */
+    background: black;
+    width: 100%;
+    font-color: white;
+
+}
+
+body {
+    width: 100%;
+}
+
+#form-container {
+    margin-left: 30%;
+
+}

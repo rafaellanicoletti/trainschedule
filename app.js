@@ -25,12 +25,58 @@ $("#addUser").on("click", function (event) {
     frequency = $("#frequencyInput").val().trim();
     
 
-    firebase.database().ref().push({
+    firebase.database().ref().push({ 
         trainName: trainName,
         destination: destination,
         firstTrain: firstTrain,
         frequency: frequency
-        // dateAdded: firebase.database.ServerValue.TIMESTAMP
+        // dateAdded: Date.now()
 
     })
+})
+
+firebase.database().ref().on("value", function (snapshot) {
+    $("#trainName").html(snapshot.val().trainName);
+    $("#destinationDisplay").html(snapshot.val().destination);
+    $("#frequencyDisplay").html(snapshot.val().frequency);
+    // $("#monthsDisplay").html(snapshot.val().comment);
+    // $("#totalDisplay").html(snapshot.val().comment);
+})
+
+// // Firebase watcher + initial loader HINT: This code behaves similarly to .on("value")
+firebase.database().ref().on("child_added", function (childSnapshot) {
+
+    // Log everything that's coming out of snapshot
+    console.log(childSnapshot.val().trainName);
+    console.log(childSnapshot.val().destination);
+    console.log(childSnapshot.val().frequency);
+
+
+   
+
+
+//     // full list of items to the well
+    newDiv.html(`<div class="row">
+        <div class="col">
+            <h3 id="trainName">${childSnapshot.val().trainName}</h3>
+        </div>
+        <div class="col">
+            <h3 id="destinationDisplay">${childSnapshot.val().destination}</h3>
+        </div>
+        <div class="col">
+            <h3 id="frequencyDisplay">${childSnapshot.val().frequency}</h3>
+        </div>
+        <div class="col">
+            <h3 id="nextArrivalDisplay"></h3>
+        </div>
+        <div class="col">
+            <h3 id="minutesAwayDisplay"></h3>
+        </div>
+    </div>`)
+
+    $("#trains-results").append(newDiv);
+
+    // Handle the errors
+}, function (errorObject) {
+    console.log("Errors handled: " + errorObject.code);
 })
