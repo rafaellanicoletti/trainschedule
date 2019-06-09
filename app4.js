@@ -17,41 +17,23 @@ var firstTrain=0;
 var frequency=0;
 
 
-
 $("#addUser").on("click", function (event) {
     event.preventDefault();
     trainName = $("#trainInput").val().trim();
     destination = $("#destinationInput").val().trim();
     firstTrain = $("#firstTrainInput").val().trim();
-
-    //firstTrain = moment($("#firstTrainInput").val().trim(), "HH:mm").substract(10, "years").format("X");
     frequency = $("#frequencyInput").val().trim();
-    console.log(firstTrain)
-    console.log(frequency)
+    
 
     firebase.database().ref().push({ 
         trainName: trainName,
         destination: destination,
         firstTrain: firstTrain,
         frequency: frequency
+        // dateAdded: Date.now()
 
     })
-
-    // // pushing trainInfo to Firebase
-    // trainData.push(newTrain);
-
-    // // clear text-boxes
-    // $("#trainInput").val("");
-    // $("#destinationInput").val("");
-    // $("#firstTrainInput").val("");
-    // $("#frequencyInput").val("");
-
-    // // Prevents page from refreshing
-    // return false;
 })
-
-            
-            
 
 firebase.database().ref().on("value", function (snapshot) {
     $("#trainName").html(snapshot.val().trainName);
@@ -69,20 +51,11 @@ firebase.database().ref().on("child_added", function (childSnapshot) {
     console.log(childSnapshot.val().destination);
     console.log(childSnapshot.val().frequency);
 
-    // assign firebase variables to snapshots.
-    var firebaseName = childSnapshot.val().trainName;
-    var firebaseDestination = childSnapshot.val().destination;
-    var firebaseTrainTimeInput = childSnapshot.val().trainTime;
-    var firebaseFrequency = childSnapshot.val().frequency;
 
-    var diffTime = moment().diff(moment.unix(firebaseTrainTimeInput), "minutes");
-    var timeRemainder = moment().diff(moment.unix(firebaseTrainTimeInput), "minutes") % firebaseFrequency;
-    var minutes = firebaseFrequency - timeRemainder;
-
-    var nextTrainArrival = moment().add(minutes, "m").format("hh:mm A"); 
+   
 
 
-    // full list of items to the well
+//     // full list of items to the well
     var newDiv = $("<div>")
     newDiv.html(`<div class="row">
         <div class="col">
