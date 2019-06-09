@@ -37,28 +37,14 @@ $("#addUser").on("click", function (event) {
 
     })
 
-    // // pushing trainInfo to Firebase
-    // trainData.push(newTrain);
-
-    // // clear text-boxes
-    // $("#trainInput").val("");
-    // $("#destinationInput").val("");
-    // $("#firstTrainInput").val("");
-    // $("#frequencyInput").val("");
-
-    // // Prevents page from refreshing
-    // return false;
 })
 
             
-            
-
 firebase.database().ref().on("value", function (snapshot) {
     $("#trainName").html(snapshot.val().trainName);
     $("#destinationDisplay").html(snapshot.val().destination);
     $("#frequencyDisplay").html(snapshot.val().frequency);
-    // $("#monthsDisplay").html(snapshot.val().comment);
-    // $("#totalDisplay").html(snapshot.val().comment);
+  
 })
 
 // // Firebase watcher + initial loader HINT: This code behaves similarly to .on("value")
@@ -68,6 +54,8 @@ firebase.database().ref().on("child_added", function (childSnapshot) {
     console.log(childSnapshot.val().trainName);
     console.log(childSnapshot.val().destination);
     console.log(childSnapshot.val().frequency);
+    console.log(childSnapshot.val().firstTrain);
+
 
     // assign firebase variables to snapshots.
     var firebaseName = childSnapshot.val().trainName;
@@ -80,6 +68,13 @@ firebase.database().ref().on("child_added", function (childSnapshot) {
     var minutes = firebaseFrequency - timeRemainder;
 
     var nextTrainArrival = moment().add(minutes, "m").format("hh:mm A"); 
+
+    // Test for correct times and info
+    console.log(minutes);
+    console.log(nextTrainArrival);
+    console.log(moment().format("hh:mm A"));
+    console.log(nextTrainArrival);
+    console.log(moment().format("X"));
 
 
     // full list of items to the well
@@ -95,14 +90,17 @@ firebase.database().ref().on("child_added", function (childSnapshot) {
             <h3 id="frequencyDisplay">${childSnapshot.val().frequency}</h3>
         </div>
         <div class="col">
-            <h3 id="nextArrivalDisplay"></h3>
+            <h3 id="nextArrivalDisplay">${nextTrainArrival}</h3>
         </div>
         <div class="col">
-            <h3 id="minutesAwayDisplay"></h3>
+            <h3 id="minutesAwayDisplay">${minutes}</h3>
         </div>
     </div>`)
 
     $("#trains-results").append(newDiv);
+    $("#trains-results").attr("#inputall");
+
+ 
 
     // Handle the errors
 }, function (errorObject) {
